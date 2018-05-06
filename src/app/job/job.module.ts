@@ -20,7 +20,7 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    StoreModule.forFeature('async_job', jobReducer)
+    StoreModule.forFeature('asyncJob', jobReducer)
     ],
   providers: []
 })
