@@ -21,6 +21,7 @@ import {
     <div class="job-title"> Job Component </div>
     <button (click)='addCount()'> add count </button>
     <button (click)='addJobs()'> add jobs </button>
+    <button (click)='updateJobOne()'> update job 1 if exist </button>
   `,
   styles: [``]
 })
@@ -66,6 +67,11 @@ export class JobComponent implements OnInit, OnDestroy {
   addCount() {
     console.log('---------ADD count');
     this.store.dispatch(new JobActions.IncrementAction());
+  }
+
+  updateJobOne() {
+    console.log('---------UPDATE job one');
+    this.store.dispatch(new JobActions.UpdateJobById());
   }
 
   public ngOnDestroy() {

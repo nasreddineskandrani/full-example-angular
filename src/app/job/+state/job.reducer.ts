@@ -21,16 +21,27 @@ export function jobReducer(state = initialState, action: Action) {
     case JobActions.INCREMENT:
       return {...state, count: state.count + 1};
     case JobActions.ADD_JOBS:
-      const newArr = state.jobs.slice(0);
-      newArr.push(
+      const newJobs = state.jobs.slice(0); // clone
+      newJobs.push(
         {
-          id: (new Date()).getTime(),
+          id: state.jobs.length > 0 ? state.jobs.length + 1 : 0,
           name: 'name#' + new Date()
         }
       );
       return {
         ...state,
-        jobs: newArr
+        jobs: newJobs
+      };
+
+    case JobActions.UPDATE_JOB_BY_ID:
+      if (state.jobs.length === 0) {
+        return state;
+      }
+      const jobsToUpdate = state.jobs.slice(0); // clone
+      jobsToUpdate[0].name = 'newname#' + new Date();
+      return {
+        ...state,
+        jobs: jobsToUpdate
       };
     default:
       return state;

@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export const INCREMENT = '[job] Increment';
 export const ADD_JOBS = '[job] add jobs';
-export const UPDATE_JOB_BY_ID = '[job] Increment';
+export const UPDATE_JOB_BY_ID = '[job] Update Job By ID';
 
 export class IncrementAction implements Action {
   public readonly type = INCREMENT;
