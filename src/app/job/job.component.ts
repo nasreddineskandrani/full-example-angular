@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-class IncrementAction {
-  type = 'INCREMENT';
-}
+// app
+import * as JobActions from './+state/job.action';
+import { selectJobCount } from './+state/job.selector';
 
 @Component({
   selector: 'app-job',
@@ -17,6 +16,10 @@ export class JobComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new IncrementAction());
+    this.store.dispatch(new JobActions.IncrementAction());
+
+    this.store.select(selectJobCount).subscribe(count => {
+      console.log('this is the job: ', count);
+    });
   }
 }
