@@ -24,5 +24,14 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+  },
+  // https://github.com/angular/angular-cli/issues/807
+  suites: {
+    smoke: [
+        'e2e/job/job.component.e2e-spec.ts'
+    ],
+    performance: [
+        'e2e/job/app.e2e-spec.ts'
+    ]
   }
 };

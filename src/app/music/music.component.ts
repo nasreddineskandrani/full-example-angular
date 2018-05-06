@@ -8,7 +8,7 @@ class IncrementAction {
 @Component({
   selector: 'app-music',
   template: `
-    <div> Music Component </div>
+    <div class="music-title"> Music Component </div>
   `,
   styles: [``]
 })

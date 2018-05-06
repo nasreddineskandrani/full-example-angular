@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'app-job',
   template: `
-    <div> Job Component </div>
+    <div class="job-title"> Job Component </div>
     <button (click)='addCount()'> add count </button>
     <button (click)='addJobs()'> add jobs </button>
   `,
