@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { map, withLatestFrom, takeWhile } from 'rxjs/operators';
 // app
 import { AppState } from '../app.module';
@@ -32,16 +32,16 @@ export class JobComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.select(selectJobCount).pipe(takeWhile(() => this.alive)).subscribe(count => {
+    this.store.pipe(select(selectJobCount), takeWhile(() => this.alive)).subscribe(count => {
       console.log('this is the count: ', count);
     });
 
-    this.store.select(selectJobs).pipe(takeWhile(() => this.alive)).subscribe(jobs => {
+    this.store.pipe(select(selectJobs), takeWhile(() => this.alive)).subscribe(jobs => {
       console.log('this is the jobs: ', jobs);
     });
 
-    this.store.select(selectCountAndJobs).pipe(takeWhile(() => this.alive)).subscribe(jobs => {
-      console.log('this is the jobs: ', jobs);
+    this.store.pipe(select(selectCountAndJobs), takeWhile(() => this.alive)).subscribe(countAndJobs => {
+      console.log('this is the count and jobs: ', countAndJobs);
     });
 
     combineLatestTest(this.store).pipe(takeWhile(() => this.alive)).subscribe(a => {
@@ -52,11 +52,16 @@ export class JobComponent implements OnInit, OnDestroy {
       console.log('WOUHOU! Zip zip! this is count and jobs: ', a);
     });
 
-    this.store.select(selectCountWithLatestFromJobs)
-      .pipe(takeWhile(() => this.alive), withLatestFrom(getLatestJobs(this.store)))
-      .subscribe(([a, b]) => {
-        console.log('this is the count with latest from jobs: ', a, b);
-      });
+    this.store.pipe(
+      select(selectCountWithLatestFromJobs),
+      takeWhile(() => this.alive),
+      withLatestFrom(
+        this.store.pipe(select(selectJobs))
+      )
+    )
+    .subscribe(([a, b]) => {
+      console.log('this is the count with latest from jobs: ', a, b);
+    });
   }
 
   addJobs() {
