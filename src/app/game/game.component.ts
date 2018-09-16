@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { HeroService } from './hero.service';
 
 @Component({
   selector: 'app-game',
@@ -12,7 +11,7 @@ import { HeroService } from './hero.service';
 export class GameComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject<boolean>();
 
-  constructor(public heroService: HeroService) {}
+  constructor() {}
 
   ngOnInit() {}
 
