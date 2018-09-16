@@ -16,4 +16,8 @@ export class HeroService {
       return maxLevel;
     }, 0);
   }
+
+  blabla(): string {
+    return 'blabla';
+  }
 }

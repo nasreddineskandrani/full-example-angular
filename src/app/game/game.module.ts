@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './game.component';
 import { HeroService } from './hero.service';
 import { GameAService } from './game-a.service';
+import { GameBService } from './game-b.service';
 
 const routes: Routes = [
   {
@@ -15,6 +16,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [GameComponent],
   imports: [RouterModule.forChild(routes)],
-  providers: [GameAService, HeroService]
+  providers: [GameAService, GameBService, HeroService]
 })
 export class GameModule {}

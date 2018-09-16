@@ -4,7 +4,7 @@ import { HeroService } from './hero.service';
 import { Hero } from './hero.model';
 
 @Injectable()
-export class GameAService {
+export class GameBService {
   constructor(private heroService: HeroService) {}
 
   play(heroes: Hero[]) {

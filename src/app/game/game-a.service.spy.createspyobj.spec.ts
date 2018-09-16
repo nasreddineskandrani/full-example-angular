@@ -3,8 +3,25 @@ import { TestBed } from '@angular/core/testing';
 import { GameAService } from './game-a.service';
 import { HeroService } from './hero.service';
 import { Hero } from './hero.model';
+import { Type } from '@angular/core';
 
-describe('game-a.service.testbed', () => {
+// https://itnext.io/better-typescript-support-for-jasmine-20dc7454ba94
+export function spyOnClass<T>(spiedClass: Type<T>) {
+  const prototype = spiedClass.prototype;
+
+  const methods = Object.getOwnPropertyNames(prototype)
+    // Object.getOwnPropertyDescriptor is required to filter functions
+    .map(name => [name, Object.getOwnPropertyDescriptor(prototype, name)])
+    .filter(([name, descriptor]) => {
+      // select only functions
+      return (descriptor as PropertyDescriptor).value instanceof Function;
+    })
+    .map(([name]) => name);
+  // return spy object
+  return jasmine.createSpyObj('spy', [...methods]);
+}
+
+describe('game-a.service.spy', () => {
   let gameAService: GameAService;
   let heroServiceSpy: jasmine.SpyObj<HeroService>;
 
@@ -14,7 +31,7 @@ describe('game-a.service.testbed', () => {
         GameAService,
         {
           provide: HeroService,
-          useValue: jasmine.createSpyObj('HeroService', ['computeMaxLevel'])
+          useValue: spyOnClass(HeroService)
         }
       ]
     });
@@ -32,6 +49,7 @@ describe('game-a.service.testbed', () => {
       };
 
       heroServiceSpy.computeMaxLevel.and.returnValue(44);
+      heroServiceSpy.blabla.and.returnValue('t1');
 
       const heroes = [firstHero];
       expect(gameAService.play(heroes)).toEqual(true);
@@ -39,6 +57,7 @@ describe('game-a.service.testbed', () => {
 
     it('should not be able to play when no hero', () => {
       heroServiceSpy.computeMaxLevel.and.returnValue(null);
+      heroServiceSpy.blabla.and.callThrough(); // call the replaced spied one not the original
 
       const heroes = [];
       expect(gameAService.play(heroes)).toEqual(false);
@@ -46,6 +65,7 @@ describe('game-a.service.testbed', () => {
 
     it('should not be able to play when no hero', () => {
       heroServiceSpy.computeMaxLevel.and.returnValue('');
+      heroServiceSpy.blabla.and.returnValue('t3');
 
       const heroes = [];
       expect(gameAService.play(heroes)).toEqual(false);
