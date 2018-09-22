@@ -27,7 +27,7 @@ describe('game-a.service.testbed', () => {
     });
 
     it('should not be able to play when no hero', () => {
-      const heroes = [];
+      const heroes: any = [];
       expect(gameAService.play(heroes)).toEqual(false);
     });
   });

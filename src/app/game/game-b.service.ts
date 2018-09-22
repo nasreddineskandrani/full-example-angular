@@ -10,7 +10,7 @@ export class GameBService {
   play(heroes: Hero[]) {
     console.log(this.heroService.blabla());
     const maxLevel = this.heroService.computeMaxLevel(heroes);
-    if (maxLevel) {
+    if (maxLevel > 0) {
       return true;
     }
     return false;

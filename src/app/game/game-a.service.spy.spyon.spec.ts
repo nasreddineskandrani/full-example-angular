@@ -33,10 +33,10 @@ describe('game-a.service.spy.2', () => {
     });
 
     it('should not be able to play when no hero', () => {
-      spyOn(heroService, 'computeMaxLevel').and.returnValue(null);
+      spyOn(heroService, 'computeMaxLevel').and.returnValue(-1);
       spyOn(heroService, 'blabla').and.callThrough();
 
-      const heroes = [];
+      const heroes: any = [];
       expect(gameAService.play(heroes)).toEqual(false);
     });
 
@@ -44,7 +44,7 @@ describe('game-a.service.spy.2', () => {
       spyOn(heroService, 'computeMaxLevel').and.returnValue('');
       spyOn(heroService, 'blabla').and.returnValue('t3');
 
-      const heroes = [];
+      const heroes: any = [];
       expect(gameAService.play(heroes)).toEqual(false);
     });
   });

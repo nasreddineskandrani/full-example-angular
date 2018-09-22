@@ -4,7 +4,7 @@ import { GameBService } from './game-b.service';
 import { HeroService } from './hero.service';
 import { Hero } from './hero.model';
 
-describe('game-b.service.async', () => {
+describe('game-b.service.fakeasync', () => {
   let gameBService: GameBService;
 
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('game-b.service.async', () => {
     });
 
     it('should not be able to play when no hero', () => {
-      const heroes = [];
+      const heroes: any = [];
       expect(gameBService.play(heroes)).toEqual(false);
     });
   });

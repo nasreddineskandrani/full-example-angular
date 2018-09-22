@@ -12,23 +12,13 @@ export const selectJobFeature = (state: any) => {
   return state.asyncJob;
 };
 
-export const selectJobCount = createSelector(
-  selectJobFeature,
-  (state: JobState) => state.count
-);
+export const selectJobCount = createSelector(selectJobFeature, (state: JobState) => state.count);
 
-export const selectJobs = createSelector(
-  selectJobFeature,
-  (state: JobState) => state.jobs
-);
+export const selectJobs = createSelector(selectJobFeature, (state: JobState) => state.jobs);
 
-export const selectCountAndJobs = createSelector(
-  selectJobCount,
-  selectJobs,
-  (count: number, jobs: Job[]) => {
-    return {count: count, jobs: jobs};
-  }
-);
+export const selectCountAndJobs = createSelector(selectJobCount, selectJobs, (count: number, jobs: Job[]) => {
+  return { count: count, jobs: jobs };
+});
 
 export const selectCountWithLatestFromJobs = createSelector(
   selectJobCount,
@@ -38,26 +28,26 @@ export const selectCountWithLatestFromJobs = createSelector(
   }
 );
 
-export function getLatestJobs(store): Observable<any> {
+export function getLatestJobs(store: any): Observable<any> {
   const jobAsync$: Observable<JobState> = store.select('asyncJob');
   const jobs$: Observable<Job[]> = jobAsync$.pipe(map(state => state.jobs));
   return jobs$;
 }
 
 // Some tests with custom selectors
-export function combineLatestTest(store): Observable<any> {
+export function combineLatestTest(store: any): Observable<any> {
   const jobAsync$: Observable<JobState> = store.select('asyncJob');
   const count$: Observable<number> = jobAsync$.pipe(map(state => state.count));
   const jobs$: Observable<Job[]> = jobAsync$.pipe(map(state => state.jobs));
   return combineLatest(count$, jobs$, (count, jobs) => {
-    return {count: count, jobs: jobs};
+    return { count: count, jobs: jobs };
   });
 }
-export function zipTest(store): Observable<any> {
+export function zipTest(store: any): Observable<any> {
   const jobAsync$: Observable<JobState> = store.select('asyncJob');
   const count$: Observable<number> = jobAsync$.pipe(map(state => state.count));
   const jobs$: Observable<Job[]> = jobAsync$.pipe(map(state => state.jobs));
   return zip(count$, jobs$, (count, jobs) => {
-    return {count: count, jobs: jobs};
+    return { count: count, jobs: jobs };
   });
 }

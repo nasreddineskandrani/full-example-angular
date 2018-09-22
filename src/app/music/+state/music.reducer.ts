@@ -8,25 +8,25 @@ export interface Tune {
   name: string;
 }
 
-export interface MusicState extends EntityState<Tune>  {
+export interface MusicState extends EntityState<Tune> {
   count: number;
-  selectedTuneId: number;
+  selectedTuneId: number | undefined;
 }
 
 export const tunesAdapter = createEntityAdapter<Tune>({
   selectId: (tune: Tune) => tune.id,
-  sortComparer: false,
+  sortComparer: false
 });
 
 export const initialState: MusicState = tunesAdapter.getInitialState({
   count: 0,
-  selectedTuneId: null
+  selectedTuneId: undefined
 });
 
 export function musicReducer(state = initialState, action: Action) {
   switch (action.type) {
     case MusicActions.INCREMENT:
-      return {...state, count: state.count + 1};
+      return { ...state, count: state.count + 1 };
 
     case MusicActions.ADD_TUNES:
       return tunesAdapter.addMany(
@@ -35,7 +35,9 @@ export function musicReducer(state = initialState, action: Action) {
             id: state.ids.length > 0 ? state.ids.length : 0,
             name: 'name#' + new Date()
           }
-        ], state);
+        ],
+        state
+      );
 
     case MusicActions.UPDATE_TUNE_BY_ID:
       if (state.ids.length === 0) {
@@ -46,8 +48,10 @@ export function musicReducer(state = initialState, action: Action) {
           id: 0,
           changes: {
             name: 'newname#' + new Date()
-          },
-        }, state);
+          }
+        },
+        state
+      );
     default:
       return state;
   }
