@@ -14,9 +14,15 @@ interface DataResponse {
 @Component({
   selector: 'app-game',
   template: `
-    <div class="game-title"> Game Component </div>
+    <div class="game-container ptheme-color-game"> Game Component </div>
   `,
-  styles: [``]
+  styles: [
+    `
+      .game-container {
+        min-height: 100px;
+      }
+    `
+  ]
 })
 export class GameComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject<boolean>();
