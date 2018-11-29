@@ -20,10 +20,5 @@ describe('game-a.service', () => {
       const heroes = [firstHero];
       expect(gameAService.play(heroes)).toEqual(true);
     });
-
-    it('should not be able to play when no hero', () => {
-      const heroes: any = [];
-      expect(gameAService.play(heroes)).toEqual(false);
-    });
   });
 });
