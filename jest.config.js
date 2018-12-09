@@ -1,7 +1,11 @@
 module.exports = {
   preset: 'jest-preset-angular',
-  setupTestFrameworkScriptFile: '<rootDir>/src/setupJest.ts',
   roots: ['src/app'],
   moduleFileExtensions: ['ts', 'js'],
-  collecteCoverage: true
+  testEnvironment: 'jsdom',
+  verbose: false,
+  bail: true,
+  silent: false,
+  automock: false,
+  collectCoverage: true
 };
