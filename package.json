@@ -14,7 +14,9 @@
     "testjest:ci": "jest --runInBand",
     "format:fix": "pretty-quick --staged",
     "precommit": "run-s format:fix lint",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "cypress-open": "node_modules\\.bin\\cypress open",
+    "cypress-run": "node_modules\\.bin\\cypress run"
   },
   "private": true,
   "dependencies": {
@@ -27,14 +29,16 @@
     "@angular/platform-browser": "^7.1.4",
     "@angular/platform-browser-dynamic": "^7.1.4",
     "@angular/router": "^7.1.4",
+    "@bahmutov/add-typescript-to-cypress": "^2.0.0",
     "@ngrx/entity": "^7.0.0",
     "@ngrx/store": "^7.0.0",
     "@ngrx/store-devtools": "^7.0.0",
     "core-js": "^2.4.1",
+    "cypress": "^3.2.0",
     "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.0.0-rc.0",
     "tslib": "^1.9.0",
-    "zone.js": "^0.8.19",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.11.0",
