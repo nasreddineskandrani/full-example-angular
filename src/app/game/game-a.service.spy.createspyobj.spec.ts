@@ -5,6 +5,7 @@ import { HeroService } from './hero.service';
 import { Hero } from './hero.model';
 import { Type } from '@angular/core';
 
+/*
 // https://itnext.io/better-typescript-support-for-jasmine-20dc7454ba94
 export function spyOnClass<T>(spiedClass: Type<T>) {
   const prototype = spiedClass.prototype;
@@ -72,3 +73,4 @@ describe('game-a.service.spy', () => {
     });
   });
 });
+*/
